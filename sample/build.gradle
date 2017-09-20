@@ -10,14 +10,16 @@ buildscript {
     dependencies {
         //noinspection GradleDynamicVersion
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.0.0.1-SNAPSHOT"
-        classpath "com.android.tools.build:gradle:$ANDROID_PLUGIN_3X_VERSION"
+        classpath "com.android.tools.build:gradle:2.3.3"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "me.tatarka:gradle-retrolambda:3.7.0"
     }
 }
 
 apply plugin: "com.android.application"
 apply plugin: "kotlin-android"
 apply plugin: "de.mannodermaus.android-junit5"
+apply plugin: "me.tatarka.retrolambda"
 apply plugin: "jacoco"
 
 android {
@@ -50,11 +52,11 @@ android {
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    testImplementation junit5()
-    testImplementation junit5Params()
-    testCompileOnly project(":android-junit5-embedded-runtime")
+    testCompile junit5()
+    testCompile junit5Params()
+    testProvided project(":android-junit5-embedded-runtime")
 }
 
 // IJ doesn't recognize Kotlin test classes properly,
